@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+/*
+ * Colours come from GitHub's own palette, defined by @readly/core's styles.css
+ * (dark by default, light when <html data-theme="light">). Tailwind just aliases them.
+ */
+@theme inline {
+  --color-canvas: var(--bgColor-default);
+  --color-subtle: var(--bgColor-muted);
+  --color-fg: var(--fgColor-default);
+  --color-muted: var(--fgColor-muted);
+  --color-line: var(--borderColor-default);
+  --color-accent: var(--fgColor-accent);
+  --color-success: var(--bgColor-success-emphasis);
+  --color-danger: var(--fgColor-danger);
+}
+
+body {
+  background: var(--bgColor-default);
+  color: var(--fgColor-default);
+}

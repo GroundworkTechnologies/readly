@@ -6,4 +6,5 @@ dist/
 .env*
 *.tsbuildinfo
 next-env.d.ts
+out/
 CLAUDE.md
