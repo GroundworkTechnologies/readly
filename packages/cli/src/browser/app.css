@@ -2,14 +2,14 @@ body {
   margin: 0;
   color: var(--fgColor-default);
   background: var(--bgColor-default);
-  font-family: var(--fontStack-sansSerif);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
 }
 
 .page {
   box-sizing: border-box;
   max-width: 1012px;
   margin: 0 auto;
-  padding: 32px 16px;
+  padding: 56px 16px 32px;
 }
 
 /* GitHub's README card */
@@ -71,7 +71,7 @@ body {
 }
 .nav-file:hover { background: var(--bgColor-muted); }
 .nav-file.active { background: var(--bgColor-muted); font-weight: 600; box-shadow: inset 2px 0 0 var(--fgColor-accent); }
-.has-sidebar .page { margin-left: 280px; max-width: none; padding-left: 32px; padding-right: 32px; }
+.has-sidebar .page { margin-left: 280px; max-width: none; padding: 56px 32px 32px; }
 .has-sidebar .page .markdown-body { max-width: 980px; margin: 0 auto; }
 
 @media (max-width: 900px) {
