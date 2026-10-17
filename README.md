@@ -9,10 +9,6 @@
 [![node](https://img.shields.io/node/v/@groundworktechnologies/readly?logo=nodedotjs&logoColor=white&color=339933)](https://nodejs.org)
 [![license](https://img.shields.io/npm/l/@groundworktechnologies/readly?color=green)](LICENSE)
 
-<br>
-
-![Readly rendering a Mermaid diagram and GitHub alerts in dark mode](docs/screenshot-cli.png)
-
 ---
 
 ## Why
@@ -126,15 +122,7 @@ npm run dev:web        # http://localhost:3000
 
 One renderer, shared by the CLI and the web app, so they can't drift apart.
 
-```mermaid
-flowchart LR
-  A["Markdown"] --> B["remark-parse<br/>+ GFM + math"]
-  B --> C["remark-rehype"]
-  C --> D["rehype-raw"]
-  D --> E{{"rehype-sanitize"}}
-  E --> F["slugs, anchors<br/>highlight, KaTeX, alerts"]
-  F --> G["GitHub-style HTML"]
-```
+Markdown -> remark-parse (GFM, math) -> remark-rehype -> rehype-raw -> rehype-sanitize -> slugs, anchors, highlighting, KaTeX and alerts -> GitHub-style HTML.
 
 Sanitizing runs **before** anything Readly generates itself, so only user-supplied HTML is filtered and Readly's own markup (anchor icons, alert icons, KaTeX) is left intact.
 
