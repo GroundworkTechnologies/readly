@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  color: var(--fgColor-default);
+  background: var(--bgColor-default);
+  font-family: var(--fontStack-sansSerif);
+}
+
+.page {
+  box-sizing: border-box;
+  max-width: 1012px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+/* GitHub's README card */
+.page .markdown-body {
+  box-sizing: border-box;
+  min-width: 200px;
+  padding: 32px;
+  border: 1px solid var(--borderColor-default);
+  border-radius: 6px;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--fgColor-default);
+  background: var(--bgColor-muted);
+  border: 1px solid var(--borderColor-default);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.theme-toggle:hover { border-color: var(--borderColor-muted); filter: brightness(1.15); }
+.theme-toggle .octicon { fill: currentColor; }
+
+/* folder mode */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 280px;
+  box-sizing: border-box;
+  padding: 16px 8px;
+  overflow-y: auto;
+  border-right: 1px solid var(--borderColor-default);
+  background: var(--bgColor-default);
+  font-size: 14px;
+}
+.sidebar ul { list-style: none; margin: 0; padding: 0; }
+.sidebar li { padding-left: calc(var(--depth, 0) * 12px); }
+.nav-title { padding: 4px 8px 12px; font-weight: 600; color: var(--fgColor-muted); }
+.nav-dir { padding: 8px 8px 2px; font-size: 12px; font-weight: 600; color: var(--fgColor-muted); }
+.nav-file {
+  display: block;
+  padding: 5px 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--fgColor-default);
+  border-radius: 6px;
+  text-decoration: none;
+}
+.nav-file:hover { background: var(--bgColor-muted); }
+.nav-file.active { background: var(--bgColor-muted); font-weight: 600; box-shadow: inset 2px 0 0 var(--fgColor-accent); }
+.has-sidebar .page { margin-left: 280px; max-width: none; padding-left: 32px; padding-right: 32px; }
+.has-sidebar .page .markdown-body { max-width: 980px; margin: 0 auto; }
+
+@media (max-width: 900px) {
+  .sidebar { position: static; width: auto; border-right: 0; border-bottom: 1px solid var(--borderColor-default); max-height: 40vh; }
+  .has-sidebar .page { margin-left: 0; padding: 16px; }
+}
+@media (max-width: 767px) {
+  .page { padding: 16px 8px; }
+  .page .markdown-body { padding: 16px; }
+}

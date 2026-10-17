@@ -1,0 +1,37 @@
+{
+  "name": "@groundwork/readly",
+  "version": "0.1.0",
+  "description": "Render Markdown exactly like GitHub does, locally, without pushing. Live reload included.",
+  "keywords": [
+    "markdown",
+    "readme",
+    "github",
+    "preview",
+    "mermaid",
+    "cli"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "readly": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node scripts/clean.mjs && tsup && node scripts/copy-assets.mjs",
+    "test": "npm run build && node --test test/*.test.js",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@readly/core": "*",
+    "@types/express": "^5.0.6"
+  },
+  "dependencies": {
+    "chokidar": "^4.0.3",
+    "express": "^5.3.0"
+  }
+}
