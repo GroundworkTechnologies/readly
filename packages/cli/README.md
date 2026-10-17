@@ -22,4 +22,4 @@ It renders GitHub Flavored Markdown (tables, task lists, footnotes), syntax high
 - Relative images and links resolve against the file's folder, which is the only thing served (no path traversal, no dotfiles).
 - Needs Node 18 or newer (developed and tested on Node 22).
 
-Part of [Readly](https://www.npmjs.com/package/@groundwork/readly). Unscoped `readly` is a different, unrelated package on npm.
+Source, web app and issues: [GroundworkTechnologies/readly](https://github.com/GroundworkTechnologies/readly). The unscoped `readly` package on npm is a different, unrelated project.

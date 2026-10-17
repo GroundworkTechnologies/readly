@@ -11,6 +11,15 @@
     "cli"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GroundworkTechnologies/readly.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/GroundworkTechnologies/readly#readme",
+  "bugs": {
+    "url": "https://github.com/GroundworkTechnologies/readly/issues"
+  },
   "type": "module",
   "bin": {
     "readly": "./dist/cli.js"
