@@ -1,5 +1,5 @@
 {
-  "name": "@groundwork/readly",
+  "name": "@groundworktechnologies/readly",
   "version": "0.1.0",
   "description": "Render Markdown exactly like GitHub does, locally, without pushing. Live reload included.",
   "keywords": [
@@ -22,7 +22,7 @@
   },
   "type": "module",
   "bin": {
-    "readly": "./dist/cli.js"
+    "readly": "dist/cli.js"
   },
   "files": [
     "dist"

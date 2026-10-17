@@ -11,10 +11,10 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "npm run build -w @readly/core && npm run build -w @groundwork/readly && npm run build -w @readly/web",
-    "build:cli": "npm run build -w @readly/core && npm run build -w @groundwork/readly",
+    "build": "npm run build -w @readly/core && npm run build -w @groundworktechnologies/readly && npm run build -w @readly/web",
+    "build:cli": "npm run build -w @readly/core && npm run build -w @groundworktechnologies/readly",
     "dev:web": "npm run build -w @readly/core && npm run dev -w @readly/web",
-    "test": "npm run test -w @readly/core && npm run test -w @groundwork/readly",
+    "test": "npm run test -w @readly/core && npm run test -w @groundworktechnologies/readly",
     "typecheck": "npm run typecheck -w @readly/web"
   },
   "devDependencies": {

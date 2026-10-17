@@ -3,16 +3,16 @@
 Render Markdown exactly like GitHub does, locally, without pushing.
 
 ```sh
-npx @groundwork/readly README.md           # render one file, open the browser
-npx @groundwork/readly .                   # render a folder, with a sidebar of every .md file
-npx @groundwork/readly README.md -p 4000   # custom port
-npx @groundwork/readly README.md --no-open # don't open the browser
+npx @groundworktechnologies/readly README.md           # render one file, open the browser
+npx @groundworktechnologies/readly .                   # render a folder, with a sidebar of every .md file
+npx @groundworktechnologies/readly README.md -p 4000   # custom port
+npx @groundworktechnologies/readly README.md --no-open # don't open the browser
 ```
 
 Or install it, which gives you the `readly` command:
 
 ```sh
-npm install --global @groundwork/readly
+npm install --global @groundworktechnologies/readly
 readly README.md
 ```
 
