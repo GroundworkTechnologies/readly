@@ -31,7 +31,7 @@ readly README.md
 - Saving the file (in VS Code or anywhere else) refreshes the browser within about a second, keeping your scroll position.
 - Relative images and links resolve against the file's folder. In folder mode, links between `.md` files navigate to the rendered page.
 - Local files are served from the file's folder only. Path traversal, dotfiles (such as `.env`) and symlinks that point outside the folder are refused, and requests with a foreign `Host` header are rejected.
-- Needs Node 18 or newer.
+- Needs Node 18 or newer (developed and tested on Node 22).
 
 ## Web app
 
