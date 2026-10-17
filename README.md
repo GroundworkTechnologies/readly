@@ -1,89 +1,150 @@
+<div align="center">
+
 # Readly
+
+**Preview Markdown exactly like GitHub renders it, locally, before you push.**
+
+[![npm version](https://img.shields.io/npm/v/@groundworktechnologies/readly?logo=npm&color=CB3837&label=npm)](https://www.npmjs.com/package/@groundworktechnologies/readly)
+[![npm downloads](https://img.shields.io/npm/dm/@groundworktechnologies/readly?color=CB3837&label=downloads)](https://www.npmjs.com/package/@groundworktechnologies/readly)
+[![node](https://img.shields.io/node/v/@groundworktechnologies/readly?logo=nodedotjs&logoColor=white&color=339933)](https://nodejs.org)
+[![license](https://img.shields.io/npm/l/@groundworktechnologies/readly?color=green)](LICENSE)
+
+<br>
+
+![Readly rendering a Mermaid diagram and GitHub alerts in dark mode](docs/screenshot-cli.png)
+
+</div>
+
+---
+
+## Why
+
+You edit a `README.md`, push, refresh GitHub, spot a broken table, push again. Readly cuts that loop: it renders your Markdown with the **same GitHub look** (real GitHub palette, alerts, Mermaid, math, heading anchors), in your browser, and **reloads the moment you save**.
+
+## Install
 
 Render Markdown exactly like GitHub does, locally, without pushing.
 
-![Readly rendering Mermaid and GitHub alerts in dark mode](docs/screenshot-cli.png)
-
-Two ways to use it, one shared renderer:
-
-- **CLI**: `npx @groundwork/readly README.md` opens the rendered file in your browser and reloads when you save.
-- **Web app**: paste or drop Markdown (or fetch a raw GitHub URL) and see it rendered GitHub-style.
-
-![Readly web app: editor on the left, live preview on the right](docs/screenshot-web.png)
-
-## CLI
-
 ```sh
-npx @groundwork/readly README.md           # render one file, open the browser
-npx @groundwork/readly .                   # render a folder, with a sidebar of every .md file
-npx @groundwork/readly README.md -p 4000   # custom port
-npx @groundwork/readly README.md --no-open # don't open the browser
+npx @groundworktechnologies/readly README.md           # render one file, open the browser
+npx @groundworktechnologies/readly .                   # render a folder, with a sidebar of every .md file
+npx @groundworktechnologies/readly README.md -p 4000   # custom port
+npx @groundworktechnologies/readly README.md --no-open # don't open the browser
 ```
 
-The package is published as `@groundwork/readly` because the unscoped `readly` name is taken on npm. The command it installs is still `readly`:
+Or install it, which gives you the `readly` command:
 
 ```sh
-npm install --global @groundwork/readly
+npm install --global @groundworktechnologies/readly
 readly README.md
 ```
 
-- Listens on `127.0.0.1` only. Default port is 3000; if it's busy, the next free port is used.
-- Saving the file (in VS Code or anywhere else) refreshes the browser within about a second, keeping your scroll position.
-- Relative images and links resolve against the file's folder. In folder mode, links between `.md` files navigate to the rendered page.
-- Local files are served from the file's folder only. Path traversal, dotfiles (such as `.env`) and symlinks that point outside the folder are refused, and requests with a foreign `Host` header are rejected.
+It renders GitHub Flavored Markdown (tables, task lists, footnotes), syntax highlighting, Mermaid diagrams, GitHub alerts, heading anchors, and KaTeX math. Raw HTML is sanitized. Saving the file reloads the browser. Dark by default, with a light toggle.
+
+- Listens on `127.0.0.1` only; default port 3000, next free port if busy.
+- Relative images and links resolve against the file's folder, which is the only thing served (no path traversal, no dotfiles).
 - Needs Node 18 or newer (developed and tested on Node 22).
+
+Source, web app and issues: [GroundworkTechnologies/readly](https://github.com/GroundworkTechnologies/readly). The unscoped `readly` package on npm is a different, unrelated project.
+
+> [!NOTE]
+> Tested on Linux only. macOS and Windows should work (the browser-open step has code paths for both) but haven't been tried yet. Reports welcome.
+
+## Usage
+
+```sh
+readly README.md              # render one file and open the browser
+readly .                      # render a whole folder, with a sidebar of every .md file
+readly docs/ -p 4000          # a subfolder, on a custom port
+readly README.md --no-open    # start the server, don't open the browser
+```
+
+| Flag | What it does | Default |
+| --- | --- | --- |
+| `-p`, `--port <n>` | Port to listen on. If it's busy, the next free port is used. | `3000` |
+| `--no-open` | Don't open the browser automatically. | opens |
+| `-h`, `--help` | Show help. | |
+| `-v`, `--version` | Show the version. | |
+
+Keep the file open in your editor and hit save. The browser updates in about a second and keeps your scroll position. Relative images and links resolve against the file's folder, and in folder mode, links between `.md` files navigate to the rendered page.
+
+## Features
+
+| Feature | Details |
+| --- | --- |
+| **GitHub Flavored Markdown** | Tables, task lists, strikethrough, autolinks, footnotes |
+| **Syntax highlighting** | highlight.js, coloured with GitHub's own palette |
+| **Mermaid** | Rendered in the browser, re-themed when you switch theme |
+| **GitHub alerts** | `[!NOTE]` `[!TIP]` `[!IMPORTANT]` `[!WARNING]` `[!CAUTION]`, with icons |
+| **Math** | `$inline$` and `$$display$$` via KaTeX |
+| **Heading anchors** | Slugs match GitHub's; hover shows the link icon |
+| **Safe raw HTML** | `<details>`, `<img>`, `<picture>`, `<kbd>` and similar are kept. `<script>`, `on*` handlers, `javascript:` links and `<iframe>` are removed |
+| **Dark and light** | Dark by default, one click to light, remembered across visits |
+
+### Safe by default
+
+Only the folder you point Readly at is served, and only to your own machine. It listens on `127.0.0.1`, and it refuses `..` paths, dotfiles like `.env`, symlinks that leave the folder, and requests with a foreign `Host` header (DNS rebinding).
 
 ## Web app
 
+The same renderer, as an editor with a live preview. It's a static site: rendering happens in your browser and nothing is uploaded.
+
 ```sh
+git clone https://github.com/GroundworkTechnologies/readly.git
+cd readly
 npm install
-npm run dev:web      # http://localhost:3000
+npm run dev:web        # http://localhost:3000
 ```
 
-- Editor on the left, live preview on the right (tabs on small screens).
-- Drag and drop a `.md` file anywhere on the page.
-- Paste a raw GitHub URL (`raw.githubusercontent.com/...`, or a `github.com/.../blob/...` link) and fetch it. Relative images and links resolve against the repository.
-- **Copy HTML** copies the sanitized rendered HTML.
-- It is a static site: rendering happens in your browser, nothing is sent to a server. `npm run build` writes it to `apps/web/out`.
+- **Split view:** editor on the left, preview on the right (tabs on phones).
+- **Drag and drop:** drop a `.md` file anywhere on the page.
+- **Fetch from GitHub:** paste a `raw.githubusercontent.com` link or a `github.com/.../blob/...` link. Relative images and links resolve against the repo.
+- **Copy HTML:** copies the sanitized rendered HTML.
 
-## What it renders
+`npm run build` writes the static site to `apps/web/out`, ready for any static host.
 
-- GitHub Flavored Markdown: tables, task lists, strikethrough, autolinks, footnotes
-- Syntax-highlighted code blocks, using GitHub's own colour palette
-- [Mermaid](https://mermaid.js.org) diagrams, rendered client-side and re-themed when you switch theme
-- GitHub alerts: `> [!NOTE]`, `[!TIP]`, `[!IMPORTANT]`, `[!WARNING]`, `[!CAUTION]`
-- Heading anchors with the hover link icon
-- Math with KaTeX: `$...$` and `$$...$$`
-- Raw HTML, sanitized with `rehype-sanitize` (GitHub's allow-list, plus `<picture>` and `<source>`): `<details>`, `<img>`, `<br>`, `<picture>`, `<kbd>` and so on survive; `<script>`, event handlers, `javascript:` links and `<iframe>` do not
+## How it works
 
-**Theme:** dark by default, with a toggle (top right) to switch to light. Your choice is remembered in the browser. The colours are the real `github-markdown-css` palettes.
+One renderer, shared by the CLI and the web app, so they can't drift apart.
 
-### Where it differs from GitHub
-
-"Exactly" means as close as a local renderer can get. The known gaps:
-
-- Syntax colours come from highlight.js (the common languages), not GitHub's Linguist grammars, so a few tokens are coloured differently and rarer languages are left unhighlighted.
-- Emoji shortcodes (`:tada:`), `@mentions`, `#123` issue references and commit SHAs are not expanded, since they need a repository to resolve against.
-- GitHub-only embeds (such as STL models, GeoJSON maps and videos from `user-attachments`) are not rendered.
-
-## How it's built
-
-```
-packages/core   @readly/core   shared renderer: markdown string -> HTML, plus the browser
-                               hydrate step (Mermaid, theme) and the GitHub-palette CSS
-packages/cli    @groundwork/readly   the `readly` command: Express + chokidar + Server-Sent Events
-apps/web        @readly/web    Next.js (App Router) + Tailwind, imports @readly/core
+```mermaid
+flowchart LR
+  A["Markdown"] --> B["remark-parse<br/>+ GFM + math"]
+  B --> C["remark-rehype"]
+  C --> D["rehype-raw"]
+  D --> E{{"rehype-sanitize"}}
+  E --> F["slugs, anchors<br/>highlight, KaTeX, alerts"]
+  F --> G["GitHub-style HTML"]
 ```
 
-The renderer is a [unified](https://unifiedjs.com) pipeline: `remark-parse`, `remark-gfm`, `remark-math`, `remark-rehype`, `rehype-raw`, `rehype-sanitize`, then `rehype-slug`, `rehype-autolink-headings`, `rehype-highlight`, `rehype-katex`, and small plugins for GitHub alerts and URL rewriting. Sanitizing runs **before** anything readly generates itself, so only user-supplied HTML is filtered.
+Sanitizing runs **before** anything Readly generates itself, so only user-supplied HTML is filtered and Readly's own markup (anchor icons, alert icons, KaTeX) is left intact.
+
+```
+packages/core   @readly/core                      shared renderer, theme CSS, browser hydrate (Mermaid)
+packages/cli    @groundworktechnologies/readly    the `readly` command (Express + chokidar + SSE)
+apps/web        @readly/web                       Next.js (App Router) + Tailwind, uses @readly/core
+```
+
+## Where it differs from GitHub
+
+> [!WARNING]
+> "Exactly like GitHub" means as close as a local renderer can get. These are the known gaps.
+
+- Syntax colours come from highlight.js (common languages), not GitHub's Linguist grammars, so a few tokens differ and rare languages stay plain.
+- `:tada:`, `@mentions`, `#123` references and commit SHAs aren't expanded, since they need a repository to resolve against.
+- GitHub-only embeds (3D models, GeoJSON maps, `user-attachments` videos) aren't rendered.
 
 ## Development
 
 ```sh
 npm install
-npm run build      # core, then the CLI, then the web app
-npm test           # core renderer tests + CLI integration tests
-npm link -w @groundwork/readly   # try the `readly` command locally
+npm run build          # core, then the CLI, then the web app
+npm test               # renderer tests + CLI integration tests
+npm link -w @groundworktechnologies/readly    # try the `readly` command from source
 ```
 
-Requires Node 18+ and npm. The repository uses npm workspaces only.
+Requires Node 18+ and **npm** (the repo uses npm workspaces only).
+
+## License
+
+[MIT](LICENSE) © Groundwork Technologies
