@@ -1,0 +1,20 @@
+{
+  "name": "readly-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Render Markdown exactly like GitHub does, locally, without pushing.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "npm run build -w @readly/core && npm run build -w @groundwork/readly",
+    "test": "npm run test -w @readly/core && npm run test -w @groundwork/readly"
+  },
+  "devDependencies": {
+    "typescript": "~5.9"
+  }
+}

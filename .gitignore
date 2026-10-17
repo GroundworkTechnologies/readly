@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.next/
+*.log
+.DS_Store
+.env*
+*.tsbuildinfo
+next-env.d.ts
+CLAUDE.md
